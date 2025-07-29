@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="bg-[#d8dadd]">
+
+    <div class="h-screen max-w-[1400px] m-auto pt-10">
+
+        <div class="h-32 mb-10 flex justify-between items-center">
+
+            <!-- For starting test & Timer -->
+            <div id="start_reload_button" class="h-32 w-60 rounded-lg pl-3 bg-blue-500 outer_shadow hover:pl-5 relative group cursor-pointer" onclick="start_test()">
+              <div class="h-32 w-[228px] rounded-lg bg-[#dce0e6] flex items-center p-5 absolute left-0 transition-all duration-300 group-hover:left-3">
+                <div id="start_or_" class="flex items-center justify-between w-full">
+                  <div id="start_timer_name"> <h1 class="text-xl">Start Typing</h1> </div>
+                  <div id="start_timer_logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+
+            <!-- For Typed Character Count -->
+            <div class="h-32 w-60 rounded-lg pl-3 bg-orange-500 outer_shadow hover:pl-5 relative group box hidden">
+              <div class="h-32 w-[228px] rounded-lg bg-[#dce0e6] flex items-center p-5 absolute left-0 transition-all duration-300 group-hover:left-3">
+                <div id="start_or_" class="flex items-center justify-between w-full">
+                  <div class="flex flex-col"> <span>Typed Characters</span> <span id="typed_character_counter" class="font-bold text-5xl">0</span> </div>
+                  <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672 13.684 16.6m0 0-2.51 2.225.569-9.47 5.227 7.917-3.286-.672ZM12 2.25V4.5m5.834.166-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243-1.59-1.59" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            
+            <!-- For Correct Character Count -->
+            <div class="h-32 w-60 rounded-lg pl-3 bg-green-500 outer_shadow hover:pl-5 relative group  box hidden">
+              <div class="h-32 w-[228px] rounded-lg bg-[#dce0e6] flex items-center p-5 absolute left-0 transition-all duration-300 group-hover:left-3">
+                <div id="start_or_" class="flex items-center justify-between w-full">
+                  <div class="flex flex-col"> <span>Correct Characters</span> <span id="correct_character_counter" class="font-bold text-5xl">0</span> </div>
+                  <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-9">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- For Wrong Character Count -->
+            <div class="h-32 w-60 rounded-lg pl-3 bg-red-500 outer_shadow hover:pl-5 relative group  box hidden">
+              <div class="h-32 w-[228px] rounded-lg bg-[#dce0e6] flex items-center p-5 absolute left-0 transition-all duration-300 group-hover:left-3">
+                <div id="start_or_" class="flex items-center justify-between w-full">
+                  <div class="flex flex-col"> <span>Wrong Characters</span> <span id="wrong_character_counter" class="font-bold text-5xl">0</span> </div>
+                  <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- For restart -->
+              <div class="outer_shadow rounded-full bg-[#dce0e6] flex items-center p-5 transition-all duration-300 hover:rotate-210  box hidden" onclick="restart()">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+                </svg>
+              </div>
+
+        </div>
+
+
+        <!-- For Text Area, it output the paragraph & track correct and wrong words -->
+        <div id="for_text_and_result" class="b_shadow rounded-lg h-[500px] p-5 overflow-auto">
+          <p id="for_demo_texts" class="font-semibold text-2xl leading-8">
+            <span class="font-bold text-2xl"> Welcome! </span> <br> <br>
+            You're about to take a 1-minute typing test to check your speed. Once you start, just keep typing — there is no option to fix mistakes. Focus on accuracy and speed, and have fun!
+          </p>
+        </div>
+
+    </div>
+
+
+    <script src="main.js"></script>
+  </body>
+</html>
